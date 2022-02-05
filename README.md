@@ -21,10 +21,14 @@ Design
 3. BalanceOperation is an operation that can be performed on the Account balance
    1. They abstract the logic how an operation such as deposit, withdrawal affects the balance along with a criteria.
    2. When applied to an account, the account simply updates it balance as returned by an operation.
-   3. This allows us to the keep the responsibility of Account to a minimum and change/add new ways of deposit/withdrawal without changing the Account.
+   3. This allows us to the keep the responsibility of Account to a minimum and change/add new ways of deposit/withdrawal without modifying the Account implementation.
 
 
-Notes:
-1. Avoiding overflows, safe math,  use a Money class.
+Few trade offs:
+==
+1. The balance operations do not avoid any overflow errors, I have used float64 for the amounts, that has sufficiently higher range. 
+2. Vault class creates new instance of Deposit and Withdraw operation on line 25 and 33, this might be a problem for testing.
+   1. The vault cannot be tested as single unit right now because of this.
+   2. This can be fixed by using a factory and passing it as a dependency to Vault, this would allow us to mock the operations.
 
    
