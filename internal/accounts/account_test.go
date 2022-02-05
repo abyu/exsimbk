@@ -29,4 +29,3 @@ func TestShouldNotApplyTheGivenBalanceOperationWhenItReturnsAnError(t *testing.T
 	then.AssertThat(t, err, is.EqualTo(errors.New("there is a problem")))
 	then.AssertThat(t, account.Balance(), is.EqualTo(float64(30)))
 }
-

@@ -17,7 +17,7 @@ var ErrInvalidAccount = errors.New("invalid account")
 //GetTotalBalance returns the total all account balances
 func (v *Vault) GetTotalBalance() float64 {
 	totalBalance := float64(0)
-	for _, account:= range v.accounts {
+	for _, account := range v.accounts {
 		totalBalance += account.Balance()
 	}
 
@@ -60,4 +60,3 @@ func (v *Vault) performOnValidAccount(accountID uint64, operation accounts.Balan
 
 	return 0, ErrInvalidAccount
 }
-

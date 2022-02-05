@@ -1,23 +1,9 @@
 package accounts
 
-//Account to hold the `balance` of the account with an unique id
+//Account to hold the `balance` of the account with a unique id
 type Account struct {
-	id uint64
+	id      uint64
 	balance float64
-}
-
-//BalanceOperation is contract for operations what work with account's balance
-type BalanceOperation interface {
-	Perform(accountBalance float64) (float64, error)
-}
-
-//BalanceOperationFunc is type alias that allows you use a single function as BalanceOperation without the need for
-//creating a new struct.
-type BalanceOperationFunc func(float64) (float64, error)
-
-//Perform the operation on the `accountBalance`
-func (boF BalanceOperationFunc) Perform(accountBalance float64)  (float64, error) {
-	 return boF(accountBalance)
 }
 
 //NewAccount ...

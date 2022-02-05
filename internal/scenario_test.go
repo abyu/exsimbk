@@ -37,7 +37,7 @@ func TestScenarioTwo(t *testing.T) {
 	bob := newAccount(2, 0)
 	vault := Vault{accounts: map[uint64]*accounts.Account{
 		alice.ID(): alice,
-		bob.ID(): bob,
+		bob.ID():   bob,
 	}}
 
 	//Alice deposits $30, Bob deposits $50
@@ -56,7 +56,7 @@ func TestScenarioThree(t *testing.T) {
 	bob := newAccount(2, 0)
 	vault := Vault{accounts: map[uint64]*accounts.Account{
 		alice.ID(): alice,
-		bob.ID(): bob,
+		bob.ID():   bob,
 	}}
 
 	//Alice deposits $30, Bob deposits $50
@@ -70,7 +70,6 @@ func TestScenarioThree(t *testing.T) {
 	accountBalanceMustBe(t, vault, bob.ID(), 10)
 	bankBalanceMustBe(t, vault, 40)
 }
-
 
 func accountBalanceMustBe(t *testing.T, vault Vault, id uint64, expected float64) {
 	balanceForAlice, _ := vault.RetrieveBalance(id)

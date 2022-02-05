@@ -28,7 +28,7 @@ func (o *Withdraw) Perform(accountBalance float64) (float64, error) {
 		return accountBalance, ErrInvalidWithdrawAmount
 	}
 
-	if accountBalance - o.amount < 0{
+	if accountBalance-o.amount < 0 {
 		return accountBalance, ErrInsufficientFunds
 	}
 
