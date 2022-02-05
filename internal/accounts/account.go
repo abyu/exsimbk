@@ -41,3 +41,8 @@ func (a *Account) Apply(operation BalanceOperation) (float64, error) {
 func (a *Account) Balance() float64 {
 	return a.balance
 }
+
+//ID returns the account id
+func (a *Account) ID() uint64 {
+	return a.id
+}

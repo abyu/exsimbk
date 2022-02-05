@@ -9,7 +9,7 @@ import (
 )
 
 func TestTotalBalanceIsTheSumOfAllAccountsBalances(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 23),
 		2: newAccount(2, 45),
 		3: newAccount(3, 10),
@@ -21,7 +21,7 @@ func TestTotalBalanceIsTheSumOfAllAccountsBalances(t *testing.T) {
 }
 
 func TestShouldReturnTheBalanceOfTheCustomerWithTheGivenAccountID(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 23),
 		2: newAccount(2, 45),
 		3: newAccount(3, 10),
@@ -33,7 +33,7 @@ func TestShouldReturnTheBalanceOfTheCustomerWithTheGivenAccountID(t *testing.T) 
 }
 
 func TestGetAccountBalanceShouldReturnInvalidAccountWhenNoAccountWithTheGivenAccountIDExists(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 23),
 		2: newAccount(2, 45),
 		3: newAccount(3, 10),
@@ -45,7 +45,7 @@ func TestGetAccountBalanceShouldReturnInvalidAccountWhenNoAccountWithTheGivenAcc
 }
 
 func TestDepositToAnAccountWithTheGivenAccountID(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 0),
 		2: newAccount(2, 10),
 	}}
@@ -58,7 +58,7 @@ func TestDepositToAnAccountWithTheGivenAccountID(t *testing.T) {
 }
 
 func TestDepositingToAnAccountWithTheGivenAccountIDDoesNotAffectOtherAccounts(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 0),
 		2: newAccount(2, 10),
 	}}
@@ -71,7 +71,7 @@ func TestDepositingToAnAccountWithTheGivenAccountIDDoesNotAffectOtherAccounts(t 
 }
 
 func TestWithdrawingFromAnAccountWithGivenAccountIdReducesTheAccountsBalance(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 40),
 		2: newAccount(2, 10),
 	}}
@@ -84,7 +84,7 @@ func TestWithdrawingFromAnAccountWithGivenAccountIdReducesTheAccountsBalance(t *
 }
 
 func TestWithdrawingReturnsInsufficientFundsErrWhenBalanceIsBelowWithdrawAmount(t *testing.T) {
-	vault := Vault{map[int]*accounts.Account{
+	vault := Vault{map[uint64]*accounts.Account{
 		1: newAccount(1, 20),
 		2: newAccount(2, 10),
 	}}

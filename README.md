@@ -30,5 +30,6 @@ Few trade offs:
 2. Vault class creates new instance of Deposit and Withdraw operation on line 25 and 33, this might be a problem for testing.
    1. The vault cannot be tested as single unit right now because of this.
    2. This can be fixed by using a factory and passing it as a dependency to Vault, this would allow us to mock the operations.
+3. I haven't used any Behavioral test frameworks, just added some helpers methods to make the scenario tests easily readable.
 
    
