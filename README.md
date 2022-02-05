@@ -13,6 +13,7 @@ Design
 ==
 1. Vault has a list of Account(s), is a logical collections on all Accounts in the bank.
    * Any operation that deals with Accounts in general, eg: Get an account, or a total balance.
+   * There is an assumption that, the total balance sum of the balance of all accounts.
    * This exists to keep things simple for this solution, ideally we would have a ledger, an Account manager and so on. 
 2. Account has an account id and Balance.
    * All operations that deal with a specific account in general, eg: Deposit, Withdraw.
@@ -23,5 +24,7 @@ Design
    3. This allows us to the keep the responsibility of Account to a minimum and change/add new ways of deposit/withdrawal without changing the Account.
 
 
+Notes:
+1. Avoiding overflows, safe math,  use a Money class.
 
    
