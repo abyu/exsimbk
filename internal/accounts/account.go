@@ -6,7 +6,7 @@ type Account struct {
 }
 
 type BalanceOperation interface {
-	Perform(float64) (float64, error)
+	Perform(accountBalance float64) (float64, error)
 }
 
 type BalanceOperationFunc func(float64) (float64, error)
