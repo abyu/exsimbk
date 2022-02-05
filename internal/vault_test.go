@@ -38,8 +38,9 @@ func TestGetAccountBalanceShouldReturnInvalidAccountWhenNoAccountWithTheGivenAcc
 		2: newAccount(2, 45),
 		3: newAccount(3, 10),
 	}}
+	nonExistentAccountID := uint64(5)
 
-	_, err := vault.RetrieveBalance(5)
+	_, err := vault.RetrieveBalance(nonExistentAccountID)
 
 	then.AssertThat(t, err, is.EqualTo(ErrInvalidAccount))
 }
@@ -49,11 +50,12 @@ func TestDepositToAnAccountWithTheGivenAccountID(t *testing.T) {
 		1: newAccount(1, 0),
 		2: newAccount(2, 10),
 	}}
+	firstAccountID := uint64(1)
 
-	err := vault.Deposit(1, 30)
+	err := vault.Deposit(firstAccountID, 30)
 
 	then.AssertThat(t, err, is.Nil())
-	balance, _ := vault.RetrieveBalance(1)
+	balance, _ := vault.RetrieveBalance(firstAccountID)
 	then.AssertThat(t, balance, is.EqualTo(float64(30)))
 }
 
@@ -75,11 +77,12 @@ func TestWithdrawingFromAnAccountWithGivenAccountIdReducesTheAccountsBalance(t *
 		1: newAccount(1, 40),
 		2: newAccount(2, 10),
 	}}
+	firstAccountID := uint64(1)
 
-	err := vault.Withdraw(1, 20)
+	err := vault.Withdraw(firstAccountID, 20)
 
 	then.AssertThat(t, err, is.Nil())
-	balance, _ := vault.RetrieveBalance(1)
+	balance, _ := vault.RetrieveBalance(firstAccountID)
 	then.AssertThat(t, balance, is.EqualTo(float64(20)))
 }
 
@@ -88,11 +91,12 @@ func TestWithdrawingReturnsInsufficientFundsErrWhenBalanceIsBelowWithdrawAmount(
 		1: newAccount(1, 20),
 		2: newAccount(2, 10),
 	}}
+	firstAccountID := uint64(1)
 
-	err := vault.Withdraw(1, 40)
+	err := vault.Withdraw(firstAccountID, 40)
 
 	then.AssertThat(t, err, is.EqualTo(operations.ErrInsufficientFunds))
-	balance, _ := vault.RetrieveBalance(1)
+	balance, _ := vault.RetrieveBalance(firstAccountID)
 	then.AssertThat(t, balance, is.EqualTo(float64(20)))
 }
 

@@ -20,7 +20,7 @@ Dir structure
 ==
 1. All files are under `internal` folder.
 2. The tests files are alongside the solution code.
-3. `scenario_test.go` contains high level tests, this also contains the scenario mentioned in the exercise statement along with couple others.
+3. `scenario_test.go` contains high level tests, start here, this also contains the scenario mentioned in the exercise statement along with couple others.
 
 Design
 ==
