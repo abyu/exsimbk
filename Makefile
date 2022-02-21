@@ -1,3 +1,6 @@
+SHELL 		:=$(shell which bash)
+.SHELLFLAGS :=-c
+
 .PHONY: build-dependencies
 build-dependencies:
 	echo ">> Building dependencies..."
