@@ -13,17 +13,17 @@ var ErrInvalidWithdrawAmount = errors.New("withdrawal amount must be a positive 
 
 //Withdraw operation with the `amount` to withdraw
 type Withdraw struct {
-	amount float64
+	amount int64
 }
 
 //NewWithdraw ...
-func NewWithdraw(amount float64) accounts.BalanceOperation {
+func NewWithdraw(amount int64) accounts.BalanceOperation {
 	return &Withdraw{amount}
 }
 
 //Perform the withdrawal operation on the `accountBalance` returning the updated balance
 // or unchanged balance with relevant errors.
-func (o *Withdraw) Perform(accountBalance float64) (float64, error) {
+func (o *Withdraw) Perform(accountBalance int64) (int64, error) {
 	if o.amount < 0 {
 		return accountBalance, ErrInvalidWithdrawAmount
 	}

@@ -15,8 +15,8 @@ type Vault struct {
 var ErrInvalidAccount = errors.New("invalid account")
 
 //GetTotalBalance returns the total all account balances
-func (v *Vault) GetTotalBalance() float64 {
-	totalBalance := float64(0)
+func (v *Vault) GetTotalBalance() int64 {
+	totalBalance := int64(0)
 	for _, account := range v.accounts {
 		totalBalance += account.Balance()
 	}
@@ -25,7 +25,7 @@ func (v *Vault) GetTotalBalance() float64 {
 }
 
 //Deposit deposits the 'amount` to the account with 'accountID' when present returning an error otherwise.
-func (v *Vault) Deposit(accountID uint64, amount float64) error {
+func (v *Vault) Deposit(accountID uint64, amount int64) error {
 	depositOperation := operations.NewDeposit(amount)
 
 	_, err := v.performOnValidAccount(accountID, depositOperation)
@@ -35,7 +35,7 @@ func (v *Vault) Deposit(accountID uint64, amount float64) error {
 
 //Withdraw withdraws the 'amount` from the account with 'accountID' when present with sufficient balance
 // returning an error otherwise.
-func (v *Vault) Withdraw(accountID uint64, amount float64) error {
+func (v *Vault) Withdraw(accountID uint64, amount int64) error {
 	withdrawOperation := operations.NewWithdraw(amount)
 
 	_, err := v.performOnValidAccount(accountID, withdrawOperation)
@@ -44,7 +44,7 @@ func (v *Vault) Withdraw(accountID uint64, amount float64) error {
 }
 
 //RetrieveBalance returns the current balance of the account with `accountID` when present returning an error otherwise
-func (v *Vault) RetrieveBalance(accountID uint64) (float64, error) {
+func (v *Vault) RetrieveBalance(accountID uint64) (int64, error) {
 	newBalance, err := v.performOnValidAccount(accountID, operations.RetrieveBalance)
 	if err != nil {
 		return 0, err
@@ -53,7 +53,7 @@ func (v *Vault) RetrieveBalance(accountID uint64) (float64, error) {
 	return newBalance, nil
 }
 
-func (v *Vault) performOnValidAccount(accountID uint64, operation accounts.BalanceOperation) (float64, error) {
+func (v *Vault) performOnValidAccount(accountID uint64, operation accounts.BalanceOperation) (int64, error) {
 	if account, ok := v.accounts[accountID]; ok {
 		return account.Apply(operation)
 	}

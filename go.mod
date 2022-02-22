@@ -7,5 +7,5 @@ require (
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/rakyll/gotest v0.0.6 // indirect
-	golang.org/x/sys v0.0.0-20220204135822-1c1b9b1eba6a // indirect
+	golang.org/x/sys v0.0.0-20220222200937-f2425489ef4c // indirect
 )

@@ -71,11 +71,11 @@ func TestScenarioThree(t *testing.T) {
 	bankBalanceMustBe(t, vault, 40)
 }
 
-func accountBalanceMustBe(t *testing.T, vault Vault, id uint64, expected float64) {
+func accountBalanceMustBe(t *testing.T, vault Vault, id uint64, expected int64) {
 	balanceForAlice, _ := vault.RetrieveBalance(id)
 	then.AssertThat(t, balanceForAlice, is.EqualTo(expected))
 }
 
-func bankBalanceMustBe(t *testing.T, vault Vault, expected float64) {
+func bankBalanceMustBe(t *testing.T, vault Vault, expected int64) {
 	then.AssertThat(t, vault.GetTotalBalance(), is.EqualTo(expected))
 }

@@ -11,7 +11,7 @@ func TestDepositShouldAddTheGivenAmountToBalanceReturningTheNewBalance(t *testin
 
 	updatedBalance, _ := deposit.Perform(20)
 
-	then.AssertThat(t, updatedBalance, is.EqualTo(float64(30)))
+	then.AssertThat(t, updatedBalance, is.EqualTo(int64(30)))
 }
 
 func TestDepositShouldReturnErrWhenTheGivenDepositAmountIsNegative(t *testing.T) {
@@ -20,5 +20,5 @@ func TestDepositShouldReturnErrWhenTheGivenDepositAmountIsNegative(t *testing.T)
 	updatedBalance, err := deposit.Perform(20)
 
 	then.AssertThat(t, err, is.EqualTo(ErrInvalidDepositAmount))
-	then.AssertThat(t, updatedBalance, is.EqualTo(float64(20)))
+	then.AssertThat(t, updatedBalance, is.EqualTo(int64(20)))
 }

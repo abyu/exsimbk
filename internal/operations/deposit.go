@@ -10,17 +10,17 @@ var ErrInvalidDepositAmount = errors.New("amount must be a positive value")
 
 //Deposit operation with `amount` to deposit
 type Deposit struct {
-	amount float64
+	amount int64
 }
 
 //NewDeposit ...
-func NewDeposit(amount float64) accounts.BalanceOperation {
+func NewDeposit(amount int64) accounts.BalanceOperation {
 	return &Deposit{amount}
 }
 
 //Perform the deposit operation on the given accountBalance returning the updated balance
 // or unchanged balance with relevant errors
-func (o *Deposit) Perform(accountBalance float64) (float64, error) {
+func (o *Deposit) Perform(accountBalance int64) (int64, error) {
 	if o.amount < 0 {
 		return accountBalance, ErrInvalidDepositAmount
 	}

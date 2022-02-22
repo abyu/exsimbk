@@ -12,7 +12,7 @@ func TestWithdrawShouldReduceTheBalanceWithTheGivenAmountReturningTheNewBalance(
 	updatedBalance, err := withdraw.Perform(100)
 
 	then.AssertThat(t, err, is.Nil())
-	then.AssertThat(t, updatedBalance, is.EqualTo(float64(80)))
+	then.AssertThat(t, updatedBalance, is.EqualTo(int64(80)))
 }
 
 func TestWithdrawShouldReturnErrWhenTheGivenWithdrawAmountIsNegative(t *testing.T) {
@@ -21,7 +21,7 @@ func TestWithdrawShouldReturnErrWhenTheGivenWithdrawAmountIsNegative(t *testing.
 	updatedBalance, err := withdraw.Perform(20)
 
 	then.AssertThat(t, err, is.EqualTo(ErrInvalidWithdrawAmount))
-	then.AssertThat(t, updatedBalance, is.EqualTo(float64(20)))
+	then.AssertThat(t, updatedBalance, is.EqualTo(int64(20)))
 }
 
 func TestWithdrawShouldReturnErrWhenTheWithdrawAmountIsMoreThanTheAccountBalance(t *testing.T) {
@@ -30,5 +30,5 @@ func TestWithdrawShouldReturnErrWhenTheWithdrawAmountIsMoreThanTheAccountBalance
 	updatedBalance, err := withdraw.Perform(90)
 
 	then.AssertThat(t, err, is.EqualTo(ErrInsufficientFunds))
-	then.AssertThat(t, updatedBalance, is.EqualTo(float64(90)))
+	then.AssertThat(t, updatedBalance, is.EqualTo(int64(90)))
 }

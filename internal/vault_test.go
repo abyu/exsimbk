@@ -17,7 +17,7 @@ func TestTotalBalanceIsTheSumOfAllAccountsBalances(t *testing.T) {
 
 	balance := vault.GetTotalBalance()
 
-	then.AssertThat(t, balance, is.EqualTo(float64(78)))
+	then.AssertThat(t, balance, is.EqualTo(int64(78)))
 }
 
 func TestShouldReturnTheBalanceOfTheCustomerWithTheGivenAccountID(t *testing.T) {
@@ -29,7 +29,7 @@ func TestShouldReturnTheBalanceOfTheCustomerWithTheGivenAccountID(t *testing.T) 
 
 	balance, _ := vault.RetrieveBalance(2)
 
-	then.AssertThat(t, balance, is.EqualTo(float64(45)))
+	then.AssertThat(t, balance, is.EqualTo(int64(45)))
 }
 
 func TestGetAccountBalanceShouldReturnInvalidAccountWhenNoAccountWithTheGivenAccountIDExists(t *testing.T) {
@@ -56,7 +56,7 @@ func TestDepositToAnAccountWithTheGivenAccountID(t *testing.T) {
 
 	then.AssertThat(t, err, is.Nil())
 	balance, _ := vault.RetrieveBalance(firstAccountID)
-	then.AssertThat(t, balance, is.EqualTo(float64(30)))
+	then.AssertThat(t, balance, is.EqualTo(int64(30)))
 }
 
 func TestDepositingToAnAccountWithTheGivenAccountIDDoesNotAffectOtherAccounts(t *testing.T) {
@@ -69,7 +69,7 @@ func TestDepositingToAnAccountWithTheGivenAccountIDDoesNotAffectOtherAccounts(t 
 
 	then.AssertThat(t, err, is.Nil())
 	balance := vault.GetTotalBalance()
-	then.AssertThat(t, balance, is.EqualTo(float64(40)))
+	then.AssertThat(t, balance, is.EqualTo(int64(40)))
 }
 
 func TestWithdrawingFromAnAccountWithGivenAccountIdReducesTheAccountsBalance(t *testing.T) {
@@ -83,7 +83,7 @@ func TestWithdrawingFromAnAccountWithGivenAccountIdReducesTheAccountsBalance(t *
 
 	then.AssertThat(t, err, is.Nil())
 	balance, _ := vault.RetrieveBalance(firstAccountID)
-	then.AssertThat(t, balance, is.EqualTo(float64(20)))
+	then.AssertThat(t, balance, is.EqualTo(int64(20)))
 }
 
 func TestWithdrawingReturnsInsufficientFundsErrWhenBalanceIsBelowWithdrawAmount(t *testing.T) {
@@ -97,10 +97,10 @@ func TestWithdrawingReturnsInsufficientFundsErrWhenBalanceIsBelowWithdrawAmount(
 
 	then.AssertThat(t, err, is.EqualTo(operations.ErrInsufficientFunds))
 	balance, _ := vault.RetrieveBalance(firstAccountID)
-	then.AssertThat(t, balance, is.EqualTo(float64(20)))
+	then.AssertThat(t, balance, is.EqualTo(int64(20)))
 }
 
-func newAccount(id uint64, balance float64) *accounts.Account {
+func newAccount(id uint64, balance int64) *accounts.Account {
 	account := accounts.NewAccount(id, balance)
 	return &account
 }
