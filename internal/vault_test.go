@@ -100,7 +100,27 @@ func TestWithdrawingReturnsInsufficientFundsErrWhenBalanceIsBelowWithdrawAmount(
 	then.AssertThat(t, balance, is.EqualTo(int64(20)))
 }
 
+func TestShouldReturnAListOfAllOperationsForTheGivenAccountID(t *testing.T) {
+	account := accounts.NewAccount(1, 20, []accounts.BalanceOperation{
+		operations.NewDeposit(10),
+		operations.NewDeposit(30),
+		operations.NewWithdraw(20),
+	})
+	vault := Vault{map[uint64]*accounts.Account{
+		1: &account,
+	}}
+	firstAccountID := uint64(1)
+
+	transactions, err := vault.GetAllTransactions(firstAccountID)
+
+	then.AssertThat(t, err, is.Nil())
+	then.AssertThat(t, len(transactions), is.EqualTo(3))
+	then.AssertThat(t, transactions, is.EqualTo([]string{
+		"Deposit 10", "Deposit 30", "Withdraw 20",
+	}))
+}
+
 func newAccount(id uint64, balance int64) *accounts.Account {
-	account := accounts.NewAccount(id, balance)
+	account := accounts.NewAccount(id, balance, []accounts.BalanceOperation{})
 	return &account
 }

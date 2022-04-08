@@ -60,3 +60,16 @@ func (v *Vault) performOnValidAccount(accountID uint64, operation accounts.Balan
 
 	return 0, ErrInvalidAccount
 }
+
+func (v *Vault) GetAllTransactions(accountID uint64) ([]string, error) {
+	if account, ok := v.accounts[accountID]; ok {
+		transactionList := []string{}
+		for _, transaction := range account.Transactions() {
+			transactionList = append(transactionList, transaction.String())
+		}
+
+		return transactionList, nil
+	}
+
+	return []string{}, ErrInvalidAccount
+}

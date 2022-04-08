@@ -2,6 +2,7 @@ package operations
 
 import (
 	"errors"
+	"fmt"
 	"github.com/rwwae/simplebank/internal/accounts"
 )
 
@@ -33,4 +34,8 @@ func (o *Withdraw) Perform(accountBalance int64) (int64, error) {
 	}
 
 	return accountBalance - o.amount, nil
+}
+
+func (o *Withdraw) String() string {
+	return fmt.Sprintf("Withdraw %d", o.amount)
 }

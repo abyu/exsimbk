@@ -2,6 +2,7 @@ package operations
 
 import (
 	"errors"
+	"fmt"
 	"github.com/rwwae/simplebank/internal/accounts"
 )
 
@@ -12,6 +13,7 @@ var ErrInvalidDepositAmount = errors.New("amount must be a positive value")
 type Deposit struct {
 	amount int64
 }
+
 
 //NewDeposit ...
 func NewDeposit(amount int64) accounts.BalanceOperation {
@@ -26,4 +28,8 @@ func (o *Deposit) Perform(accountBalance int64) (int64, error) {
 	}
 
 	return o.amount + accountBalance, nil
+}
+
+func (o *Deposit) String() string {
+	return fmt.Sprintf("Deposit %d", o.amount)
 }
